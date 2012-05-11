@@ -19,7 +19,7 @@ public class IOBeat extends TimerTask {
 			try {
 				socket.send("2::"); //send heartbeat;
 				System.out.println("HeartBeat Written to server");
-			} catch (IOException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

@@ -2,12 +2,14 @@ package com.clwillingham.socket.io;
 
 import java.io.IOException;
 import java.net.URI;
+import java.nio.channels.NotYetConnectedException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import net.tootallnate.websocket.WebSocketClient;
+import org.java_websocket.WebSocketClient;
+import org.java_websocket.handshake.ServerHandshake;
 
 public class IOWebSocket extends WebSocketClient{
 	
@@ -24,7 +26,7 @@ public class IOWebSocket extends WebSocketClient{
 
 
 	@Override
-	public void onIOError(IOException arg0) {
+	public void onError(Exception arg0) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -40,7 +42,10 @@ public class IOWebSocket extends WebSocketClient{
 			try {
 				send("2::");
 				System.out.println("HeartBeat written to server");
-			} catch (IOException e) {
+			} catch (NotYetConnectedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -89,11 +94,14 @@ public class IOWebSocket extends WebSocketClient{
 	}
 
 	@Override
-	public void onOpen() {
+	public void onOpen( ServerHandshake handshakedata ) {
 		try {
 			if (namespace != "")
 				init(namespace);
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -101,25 +109,25 @@ public class IOWebSocket extends WebSocketClient{
 	}
 	
 	@Override
-	public void onClose() {
+	public void onClose( int code, String reason, boolean remote ) {
 		ioSocket.onClose();
 		ioSocket.onDisconnect();
 	}
 
 
-	public void init(String path) throws IOException{
+	public void init(String path) throws IOException, InterruptedException {
 		send("1::"+path);
 	}
 	
-	public void init(String path, String query) throws IOException{
+	public void init(String path, String query) throws IOException, InterruptedException {
 		this.send("1::"+path+"?"+query);
 		
 	}
-	public void sendMessage(IOMessage message) throws IOException{
+	public void sendMessage(IOMessage message) throws IOException, InterruptedException {
 		send(message.toString());
 	}
 	
-	public void sendMessage(String message) throws IOException{
+	public void sendMessage(String message) throws IOException, InterruptedException {
 		send(new Message(message).toString());
 	}
 	

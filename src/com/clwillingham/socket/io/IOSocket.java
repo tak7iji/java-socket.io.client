@@ -63,7 +63,7 @@ public class IOSocket {
 		webSocket.connect();
 	}
 	
-	public void emit(String event, JSONObject... message) throws IOException {
+	public void emit(String event, JSONObject... message) throws IOException, InterruptedException {
 		try {
 			JSONObject data = new JSONObject();
 			JSONArray args = new JSONArray();
@@ -80,7 +80,7 @@ public class IOSocket {
 		}
 	}
 	
-	public void send(String message) throws IOException {
+	public void send(String message) throws IOException, InterruptedException {
 		IOMessage packet = new IOMessage(IOMessage.MESSAGE, "", message);
 		webSocket.sendMessage(packet);
 	}
@@ -92,6 +92,9 @@ public class IOSocket {
 					webSocket.sendMessage(new IOMessage(IOMessage.DISCONNECT, "", ""));
 				}
 			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -125,7 +128,7 @@ public class IOSocket {
 		if (open) {
 			try {
 				webSocket.close();
-			} catch (IOException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
