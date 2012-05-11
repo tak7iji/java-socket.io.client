@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     11 May 2012 11:01:19                                                        
+
+     java-socket.io.client    
+     (fork of) simple java socket.io client.
+                   
+     cmg                                                                
+     ====================================================================== -->
+<project name="java-socket.io.client" default="jar">
+	<description>
+            (fork of) simple java socket.io client.
+    </description>
+	
+	<path id="buildpath">
+		<pathelement location="lib/WebSocket.jar"/>
+		<pathelement location="lib/json.jar"/>
+	</path>
+
+
+	<target name="compile">
+		<mkdir dir="build/classes" />
+		<mkdir dir="build/examples" />
+		<javac includeantruntime="false" debug="on" srcdir="src" destdir="build/classes" classpathref="buildpath" />
+		<javac includeantruntime="false" srcdir="example" classpath="build/classes" destdir="build/examples" classpathref="buildpath" />
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar destfile="dist/socketio.jar"
+	         basedir="build/classes"
+	         includes="**/*.class"
+	         />
+	</target>
+
+	<target name="doc">
+		<delete dir="doc" />
+		<javadoc sourcepath="src"
+	             destdir="doc"
+	          />
+	</target>
+
+	<target name="clean">
+		<delete dir="build"/>
+	</target>
+
+</project>

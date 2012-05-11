@@ -3,6 +3,12 @@ Java Socket.IO Client
 
 A Socket.IO client written in Java. See the offical [Socket.IO website](http://socket.io/) for more information. 
 
+Based on https://github.com/clwillingham/java-socket.io.client
+
+Updated for changes to Java-WebSocket.
+
+Note that the original project does not specify a license, but is hosted publicly on github.
+
 Dependencies
 -----
 
