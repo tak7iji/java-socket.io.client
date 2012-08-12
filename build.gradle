@@ -8,6 +8,12 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+	example 
+}
+
+configurations.exampleCompile.extendsFrom(configurations.compile)
+
 dependencies {
 	compile files(projectDir.getAbsolutePath() + '/lib/WebSocket.jar')
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
