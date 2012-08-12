@@ -28,6 +28,7 @@ public class IOWebSocket extends WebSocketClient{
 	@Override
 	public void onError(Exception arg0) {
 		// TODO Auto-generated method stub
+		arg0.printStackTrace();
 		
 	}
 

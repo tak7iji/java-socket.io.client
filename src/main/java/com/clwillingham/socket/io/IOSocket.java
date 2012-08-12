@@ -80,6 +80,11 @@ public class IOSocket {
 		}
 	}
 	
+	public void send(String endpoint, JSONObject message) throws IOException, InterruptedException {
+		IOMessage packet = new IOMessage(IOMessage.JSONMSG, endpoint, message.toString());
+		webSocket.sendMessage(packet);
+	}
+	
 	public void send(String message) throws IOException, InterruptedException {
 		IOMessage packet = new IOMessage(IOMessage.MESSAGE, "", message);
 		webSocket.sendMessage(packet);
