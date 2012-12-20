@@ -8,7 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import org.java_websocket.WebSocketClient;
+import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 
 public class IOWebSocket extends WebSocketClient{
@@ -44,9 +44,6 @@ public class IOWebSocket extends WebSocketClient{
 				send("2::");
 				System.out.println("HeartBeat written to server");
 			} catch (NotYetConnectedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

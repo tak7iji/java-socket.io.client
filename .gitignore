@@ -3,3 +3,11 @@ _notes
 .settings
 .project
 .classpath
+
+.gradle
+*.org
+
+gradle.properties
+
+build
+lib
